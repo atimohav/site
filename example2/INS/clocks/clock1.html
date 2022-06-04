@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <link rel="shortcut icon" href="IMG/icon.gif" type="image/gif">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Проект Аладьина Тимофея 9 "Б"</title>
+    <link rel="stylesheet" type="text/css" href="../../main_style/colors/color1.css">
+    <style>
+        :root {
+            --first-color: var(--text-color2);
+            --second-color: var(--background2);
+        }
+        body {
+            background: var(--second-color);
+        }
+        *, *::after, *::before {
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 24px;
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            transition: background-image 2s;
+        }
+
+        .lines {
+            position: absolute;
+            width: 5vh;
+            height: 50vh;
+            top: 0;
+            left: calc(50vw - 2.5vh);
+            transform-origin: 50% 100%;
+            transform: rotate(calc(30deg * 1));
+            background: var(--first-color);
+        }
+        .lines:nth-child( 1) {transform: rotate(calc(30deg *  1));}
+        .lines:nth-child( 2) {transform: rotate(calc(30deg *  2));}
+        .lines:nth-child( 3) {transform: rotate(calc(30deg *  3));}
+        .lines:nth-child( 4) {transform: rotate(calc(30deg *  4));}
+        .lines:nth-child( 5) {transform: rotate(calc(30deg *  5));}
+        .lines:nth-child( 6) {transform: rotate(calc(30deg *  6));}
+        .lines:nth-child( 7) {transform: rotate(calc(30deg *  7));}
+        .lines:nth-child( 8) {transform: rotate(calc(30deg *  8));}
+        .lines:nth-child( 9) {transform: rotate(calc(30deg *  9));}
+        .lines:nth-child(10) {transform: rotate(calc(30deg * 10));}
+        .lines:nth-child(11) {transform: rotate(calc(30deg * 11));}
+        .lines:nth-child(12) {transform: rotate(calc(30deg * 12));}
+        #circle {
+            position: absolute;
+            width: 90vh;
+            height: 90vh;
+            top: 5vh;
+            left: calc(50vw - 45vh);
+            border: solid var(--first-color) 5vh;
+            background: var(--second-color);
+            border-radius: 50%;
+        }
+        #hour_array {
+            position: absolute;
+            width: 5vh;
+            height: 32.5vh;
+            top: 20vh;
+            left: calc(50vw - 5vh / 2);
+            transform-origin: 50% calc(100% - 5vh / 2);
+            border-radius: 0 0 100vw 100vw;
+            background: var(--first-color);
+        }
+        #minute_array {
+            position: absolute;
+            width: 5vh;
+            height: 45vh;
+            top: 7.5vh;
+            left: calc(50vw - 5vh / 2);
+            transform-origin: 50% calc(100% - 5vh / 2);
+            border-radius: 0 0 100vw 100vw;
+            background: var(--first-color);
+        }
+        #second_array {
+            position: absolute;
+            width: 3vh;
+            height: 41.5vh;
+            top: 10vh;
+            left: calc(50vw - 3vh / 2);
+            transform-origin: 50% calc(100% - 3vh / 2);
+            border-radius: 0 0 100vw 100vw;
+            background: var(--my-red);
+        }
+    </style>
+</head>
+<body>
+    <div class='lines'></div>
+    <div class='lines'></div>
+    <div class='lines'></div>
+    <div class='lines'></div>
+    <div class='lines'></div>
+    <div class='lines'></div>
+    <div class='lines'></div>
+    <div class='lines'></div>
+    <div class='lines'></div>
+    <div class='lines'></div>
+    <div class='lines'></div>
+    <div class='lines'></div>
+    <div id='circle'></div>
+    <div id='hour_array'></div>
+    <div id='minute_array'></div>
+    <div id='second_array'></div>
+</body>
+<script>
+    setInterval(function() {
+        document.querySelector('#hour_array').style.transform='rotate(calc(360deg / 12 * '+(new Date().getHours())+'))';
+        document.querySelector('#minute_array').style.transform='rotate(calc(360deg / 60 * '+(new Date().getMinutes())+'))';
+        document.querySelector('#second_array').style.transform='rotate(calc(360deg / 60 * '+(new Date().getSeconds())+'))';
+    }, 1);
+</script>
+</html>

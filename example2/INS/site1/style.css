@@ -1,0 +1,76 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 0;
+    text-align: center;
+    font-size: calc(1vh * 6);
+    color: white;
+    transition: all 1s;
+}
+body {
+    --background-color: white;
+    --main-background-color: white;
+    --border-color: white;
+    --shadow-color: black;
+    --border-width: 0px;
+    --margin: calc(1vh * 2.5);
+    --padding: calc(1vh * 2.5);
+}
+
+h1 {
+    font-size: calc(1vh * 12);
+    margin: 0 calc(-1 * var(--padding) - calc(1vh * 25)); 
+    padding: 0 calc(var(--padding) + calc(1vh * 25));
+    background: var(--background-color);
+    background-attachment: fixed;
+    box-shadow: 0 0 calc(1vh * 1.25) 0px var(--shadow-color);
+    text-shadow: 0 0 calc(1vh * 1.25) var(--shadow-color);
+    border: solid 0 var(--border-color);
+}
+p {
+    font-size: calc(1vh * 12.6);
+    text-shadow: 0 0 calc(1vh * 1.25) var(--shadow-color);
+}
+
+body {
+    overflow: hidden;
+    background: var(--main-background-color);
+}
+#wrapper {
+    position: absolute;
+    left: 0;
+    width: 100vw;
+    height: calc(1vh * 100);
+    background: transparent;
+    transition-property: transform;
+    transition-duration: 3s;
+}
+#wrapper div.pages {
+    position: absolute;
+    bottom: 100%;
+    left: 100%;
+    transform-origin: bottom left;
+    background: transparent;
+    transition: transform 0s;
+}
+#wrapper div.content {
+    overflow: hidden;
+    margin: var(--margin);
+    width: calc(100% - 2 * var(--margin));
+    height: calc(100% - 2 * var(--margin));
+    background: var(--background-color);
+    border: solid var(--border-width) var(--border-color);
+    border-radius: calc(calc(1vh * 2.5) + var(--border-width));
+    padding: var(--padding);
+    box-shadow: inset 0 0 calc(1vh * 1.25) 0px var(--shadow-color);
+}
+#point {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: red;
+    width: calc(1vh * 1.25);
+    height: calc(1vh * 1.25);
+    visibility: hidden;
+}

@@ -1,0 +1,105 @@
+/*MY_LISTS*/
+
+.horisont_list {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.horisont_list>div {
+    content: ' ';
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: calc(50% - 100px);
+    width: 200px;
+    height: 200px;
+    list-style-type: none;
+    --turn: 45deg;
+    --color: var(--text-color1);
+    background: var(--background1);
+    z-index: 3;
+}
+.horisont_list>.left_array {
+    transform: rotate(-90deg);
+    left: 0;
+}
+.horisont_list>.right_array {
+    transform: rotate(90deg);
+    right: 0;
+}
+.horisont_list>div:hover {
+    --color: var(--href-color);
+    --turn: 30deg;
+}
+.horisont_list>div>div {
+    position: absolute;
+    border-radius: 1000px;
+    width: 10%;
+    height: 40%;
+    top: 30%;
+    left: 45%;
+    background-color: var(--color);
+    transform-origin: 50% 10%;
+    transition: transform 0.4s, background 1s;
+}
+
+.horisont_list>div>.one {
+    transform: rotate(var(--turn));
+}
+
+.horisont_list>div>.two {
+    transform: rotate(calc(-1 * var(--turn)));
+}
+
+.horisont_list>ul {
+    border-radius: 50px;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 200px;
+    width: calc(100% - 400px);
+    height: 100%;
+    list-style-type: none;
+    overflow: hidden;
+}
+.horisont_list>ul>li {
+    position: absolute;
+    width: 100%;
+    height: inherit;
+    top: 0;
+    left: -100%;
+    z-index: 0;
+    transition: left 0s;
+    overflow: hidden;
+}
+.horisont_list>ul>li>* {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+.horisont_list>ul>li.switched {
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+.horisont_list>ul>li.last {
+    top: 0;
+    left: -100%;
+    z-index: 1;
+}
+.horisont_list>ul>li.next {
+    top: 0;
+    left: 100%;
+    z-index: 1;
+}
+.horisont_list>ul>li.animated {
+    transition: left 1s;
+}
+/*MY_LISTS*/

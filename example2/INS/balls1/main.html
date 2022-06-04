@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>points1</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            background: rgb(192, 192, 192);
+            overflow: hidden;
+        }
+        #wrapper {
+            width: 100vw;
+            height: 100vh;
+        }
+        .ball {
+            position: absolute;
+            border: 1px solid black;
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 0, 0, 0.25);
+        }
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <canvas id="maincanvas" style="width: 2000px; height: 2000px; border: black solid 0px;" width="2000px" height="2000px"></canvas>
+    </div>
+</body>
+<script src="code.js"></script>
+</html>

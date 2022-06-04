@@ -1,0 +1,148 @@
+:root {
+    --left-panel-width: 80px;
+    --main-h1-width: 0px;
+    --scroll-width: 0px;
+    --radius: 0px;
+    --shadow-width: 0;
+}
+
+*, *::after, *::before {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 24px;
+    background-attachment: fixed !important;
+    background-position: 0 0;
+    transition: background-image 2s;
+}
+
+iframe {
+    border: 0;
+    width: 100%;
+    height: 100%;
+}
+
+a {
+    background: var(--href-background);
+    color: var(--href-text-color);
+    text-decoration: none;
+}
+
+::selection {
+    background: var(--selection-background);
+    color: var(--selection-text-color);
+}
+
+body {
+    position: fixed;
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: var(--background2);
+}
+
+#wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding-top: 0px;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden scroll;
+    z-index: 0;
+}
+#wrapper_uppoint {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+}
+
+#wrapper>#wrapper_content {
+    position: relative;
+    margin: calc(var(--main-h1-width) + 20px) 20px 20px calc(var(--left-panel-width) + 20px);
+    background: var(--background2);
+    color: var(--text-color2);
+}
+
+#wrapper>#wrapper_content>.h_line {
+    width: calc(100% + 40px);
+    height: 20px;
+    background: var(--background2);
+    margin: 20px -20px;
+}
+
+/*
+#wrapper>.pages {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+}
+
+#wrapper>.pages>.content {
+    position: absolute;
+    top: 20px;
+    margin: auto 0;
+    left: calc(var(--left-panel-width) + 20px);
+    right: 20px;
+    bottom: 20px;
+    color: var(--text-color1);
+}
+
+#wrapper>.pages:first-child>.content {
+    top: calc(var(--main-h1-width) + 20px);
+}
+*/
+#wrapper>#wrapper_content h2 {
+    margin: auto;
+    text-align: center;
+    width: 100%;
+    font-size: 48px;
+    line-height: 50px;
+}
+#wrapper>#wrapper_content p {
+    margin: 0;
+}
+#wrapper>#wrapper_content a:not([class]) {
+    display: inline-block;
+    background: var(-href-background);
+    color: var(--href-text-color);
+}
+#wrapper>#wrapper_content a:not([class])::after {
+    display: block;
+    content: '';
+    width: 0;
+    margin: auto;
+    height: 0;
+    border-style: solid;
+    border-color: inherit;
+    border-width: 0 0 3px 0;
+    transition: width 0.5s, margin 0.5s;
+}
+#wrapper>#wrapper_content a:not([class]):hover::after {
+    width: 100%;
+}
+
+#main_h1 {
+    pointer-events: none;
+    position: absolute;
+    width: calc(100vw - var(--scroll-width));
+    padding: 0 var(--main-h1-width);
+    border-radius: 0;
+    background-color: var(--background1);
+    background-image: var(--background1);
+    text-align: center;
+    color: var(--text-color1);
+    font-size: 60px;
+    overflow: hidden;
+    z-index: 3;
+}
+
+@media screen and (max-width: 1200px) {
+    #main_h1 {
+        padding: 0 calc(var(--scroll-width) + 20px) 0 0;
+        text-align: right;
+    }
+}
+

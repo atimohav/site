@@ -1,0 +1,51 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+body {
+    overflow: hidden;
+}
+
+#snakegame {
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    background: rgb(200, 200, 200);
+}
+#snakegame .startbutton {
+    padding: 10px;
+    text-align: center;
+    line-height: 80vh;
+    border-radius: 20px;
+    position: absolute;
+    top: 10vh;
+    left: calc(50vw - 50vh + 10vh);
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(200, 200, 200);
+    font-size: 100px;
+    width: 80vh;
+    height: 80vh;
+    border: solid rgb(200, 200, 200) 3px;
+    background: url(1.png) rgba(255, 255, 255, 0.9) no-repeat;
+    background-size: 100%;
+    
+    transition: all 1s;
+}
+#snakegame .snaketable {
+    position: absolute;
+    left: calc(50vw - 100vh / 2);
+    width: 100vh;
+    height: 100vh;
+    border-collapse: collapse;
+    
+    transition-property: left, top;
+    transition-duration: 1s;
+}
+#snakegame .snaketable tr {
+    background: transparent;
+}
+#snakegame .snaketable td {
+    border: 2px solid rgb(200, 200, 200);
+    z-index: 0;
+}

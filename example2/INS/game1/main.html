@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body style="background: white;">
+    <div style="border: solid 2px; width: 700px; height: 700px; border-radius: 10000px; position: absolute; top: calc(50% - 350px); left: calc(50% - 350px); overflow: hidden; background: white;">
+        <div style='background: blue; width: 20px; height: 20px; position: absolute; top: 340px; left: 340px;'></div>
+        <canvas id="main_canvas" width="700px" height="700px" style="width: 700px; height: 700px;"></canvas>
+    </div>
+    <script>
+        var pause_flag=true;
+        var main=document.getElementById('main_canvas');
+        var main_canvas=main.getContext('2d');
+
+        var arr_2d=new Array(Math.pow(700, 2));
+        var speed_forward=0.1;
+        var speed_forward_max=3;
+        var braking_flag=0;
+        var speed_angle=6;
+        var turning_flag=0;
+        var city=new Array(7*7);
+        city=[
+            [[0, 000], [0, 000], [0, 000], [0, 000], [0, 000], [0, 000], [0, 000]],
+            [[0, 000], [0, 000], [0, 000], [0, 100], [0, 200], [0, 000], [0, 000]],
+            [[0, 000], [0, 000], [0, 000], [0, 700], [0, 000], [0, 000], [0, 000]],
+            [[0, 000], [0, 000], [0, 000], [1, 000], [0, 000], [0, 000], [0, 300]],
+            [[0, 000], [0, 000], [0, 000], [0, 000], [0, 000], [0, 000], [1, 000]],
+            [[0, 000], [0, 000], [0, 000], [0, 000], [0, 000], [0, 000], [1, 000]],
+            [[0, 000], [0, 000], [0, 000], [0, 000], [0, 000], [0, 000], [0, 000]]
+        ];
+        var k_see=2;
+        var x_see=350;
+        var y_see=350;
+        var direction=0;
+        var time=0;
+
+        var house_arr=[
+            function(x, y, w, h, i) {
+                main_canvas.fillStyle='rgba('+(32+160/700*i)+','+(32+160/700*i)+','+(32+160/700*i)+', 1)';
+                if(i%33>10 && i%33<25 && i>33) {
+                    main_canvas.fillRect(x, y, w/4, h/4);
+                    main_canvas.fillRect(x+w/8*3, y, w/4, h/4);
+                    main_canvas.fillRect(x+w/8*6, y, w/4, h/4);
+
+                    main_canvas.fillRect(x, y+h/8*3, w/4, h/4);
+                    main_canvas.fillRect(x+w/8*6, y+h/8*3, w/4, h/4);
+
+                    main_canvas.fillRect(x, y+h/8*6, w/4, h/4);
+                    main_canvas.fillRect(x+w/8*3, y+h/8*6, w/4, h/4);
+                    main_canvas.fillRect(x+w/8*6, y+h/8*6, w/4, h/4);
+
+                    main_canvas.fillStyle='rgba(255, 255, 0, 0.1)';
+                    main_canvas.fillRect(x+w/8*2, y, w/8, h);
+                    main_canvas.fillRect(x+w/8*5, y, w/8, h);
+                    main_canvas.fillRect(x, y+h/8*2, w, h/8);
+                    main_canvas.fillRect(x, y+h/8*5, w, h/8);
+                }
+                else
+                    main_canvas.fillRect(x, y, w, h);
+
+            },
+            function(x, y, w, h, i) {
+                main_canvas.fillStyle='rgba('+(64+128/100*i)+','+(64+128/100*i)+','+(64+128/100*i)+', 1)';
+                main_canvas.strokeStyle='rgba('+(64+128/33*i)+','+(64+128/33*i)+','+(64+128/33*i)+', 1)';
+                if(i<=33) {
+                    main_canvas.strokeRect(x, y, w, h);
+                }
+                if(i<=50) {
+                    main_canvas.fillRect(x+w/4, y+h/4, w/2, h/2);
+                }
+                else if(i<=100) {
+                    main_canvas.fillRect(x+w/8+(w/4*3/75*(i-50)*1.5/2), y+h/10, w/4*3-(w/4*3/75*(i-50)*1.5), h/5*4);
+                } 
+            }
+        ];
+
+        document.onkeydown = function(event) {
+            if(event.keyCode==65) {
+                turning_flag=-1;
+            }
+            if(event.keyCode==68) {
+                turning_flag=1;
+            }
+            if(event.keyCode==83) {
+                braking_flag=1;
+            }
+            if(event.keyCode==27) {
+                pause_flag=!pause_flag;
+            }
+        }
+        document.onkeyup = function(event) {
+            if(event.keyCode==65 || event.keyCode==68) {
+            }
+            if(event.keyCode==83) {
+                braking_flag=0;
+            }
+        }
+
+        setInterval(function() {
+            if(pause_flag==false) {
+                y_see-=speed_forward*Math.cos(direction/180*Math.PI);
+                x_see-=speed_forward*Math.sin(direction/180*Math.PI);
+                if(!braking_flag) {
+                    if(speed_forward<speed_forward_max)
+                        speed_forward*=1.01;
+                    if(speed_forward>speed_forward_max)
+                        speed_forward=speed_forward_max;
+                }
+                else {
+                    if(speed_forward>0.1)
+                        speed_forward/=1.01;
+                }
+                if((turning_flag || direction%90!=0)/* && (city[x_see][])*/) { //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                    direction-=turning_flag*speed_angle;
+                    direction+=360;
+                    if(direction%90==0) turning_flag=0;
+                    main.style.transform='rotate('+direction+'deg)';
+                }
+            }
+        }, 10);
+        setInterval(function() {
+            main_canvas.clearRect(0, 0,700, 700);
+            for(var h=0; h<700; h+=2) {
+                for(var i=0; i<city.length; i++) {
+                    for(var j=0; j<city[i].length; j++) {
+                        if(((city[i][j][1] && city[i][j][1]>=h) || city[i][j][0]==1) && i*100>x_see-500 && i*100<x_see+500 && j*100>y_see-500 && j*100<y_see+500) {
+                            house_arr[city[i][j][0]](((i*100)-x_see)/((k_see-1)*700)*((k_see-1)*700+h)+350, ((j*100)-y_see)/((k_see-1)*700)*((k_see-1)*700+h)+350, 
+                                        ( ((i*100+100)-x_see)/((k_see-1)*700)*((k_see-1)*700+h) )-( ((i*100)-x_see)/((k_see-1)*700)*((k_see-1)*700+h) ), 
+                                        ( ((j*100+100)-y_see)/((k_see-1)*700)*((k_see-1)*700+h) )-( ((j*100)-y_see)/((k_see-1)*700)*((k_see-1)*700+h) ), h);
+                        }
+                    }
+                }
+            }
+        }, 20);
+    </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+/*SCROLL*/
+#scrollbar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: var(--scroll-width);
+    height: 100vh;
+    background: var(--background1);
+    pointer-events: none;
+    z-index: 1000;
+}
+#scrollbar::after, #scrollbar::before {
+    content: " ";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: var(--scroll-width);
+    background: var(--text-color1);
+    clip-path: polygon(5px calc(100% - 5px), 50% 5px, calc(100% - 5px) calc(100% - 5px));
+}
+#scrollbar::after {
+    top: 0;
+}
+#scrollbar::before {
+    bottom: 0;
+    transform: scaleY(-1);
+}
+
+#scrollbar_unvisibler {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: var(--scroll-width);
+    height: 100vh;
+    background: var(--background1);
+    pointer-events: none;
+    z-index: 999;
+}
+
+#scrollbar>div {
+    position: relative;
+    margin-top: var(--scroll-width);
+    width: 100%;
+}
+#scrollbar>div::after {
+    position: absolute;
+    --margin: 5px;
+    top: 0;
+    left: var(--margin);
+    right: var(--margin);
+    bottom: 0;
+    display: block;
+    content: " ";
+    border-radius: 100vw;
+    background: var(--text-color1);
+}
+/*SCROLL*/

@@ -1,0 +1,57 @@
+/*SHEMA1*/
+
+#shema1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 200px;
+    height: 100%;
+}
+#shema1>div {
+    font-size: 30px;
+    padding: 10px;
+    position: absolute;
+    top: 0;
+    width: 33.33333%;
+    height: 100%;
+}
+#shema1>div img:first-child {
+    width: 100%;
+}
+#shema1>div>a.shema_path {
+    font-family: inherit;
+    font-size: inherit;
+    text-decoration: none;
+    color: unset;
+}
+
+#shema1>div>a.shema_path * {
+    font-size: 22px;
+}
+#shema1>div:nth-child(1) {
+    left: 0%;
+}
+#shema1>div:nth-child(1)>a.shema_path>p {
+    color: #F16529;
+}
+#shema1>div:nth-child(1) img:first-child {
+    background: #F16529;
+}
+#shema1>div:nth-child(2) {
+    left: 33.333333%;
+}
+#shema1>div:nth-child(2)>a.shema_path>p {
+    color: #29A9DF;
+}
+#shema1>div:nth-child(2) img:first-child {
+    background: #29A9DF;
+}
+#shema1>div:nth-child(3) {
+    left: 66.666666%;
+}
+#shema1>div:nth-child(3)>a.shema_path>p {
+    color: #F7DF1E;
+}
+
+/*SHEMA1*/

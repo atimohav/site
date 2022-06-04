@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <link rel="shortcut icon" href="IMG/icon.gif" type="image/gif">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Проект Аладьина Тимофея 9 "Б"</title>
+    <link rel="stylesheet" type="text/css" href="../../colors.css">
+    <style>
+        *, *::after, *::before {
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 24px;
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            transition: background-image 2s;
+            --pixel: 4px;
+        }
+        div {
+            position: absolute;
+            height: 100vh;
+            width: 100vw;
+            top: 0;
+            left: 0;
+        }
+        div:first-child {
+            --neon-color1: #ffff00;
+            --neon-color2: #ff0000;
+            --neon-width: 5;
+            border-radius: 10vh;
+            background: #000000;
+            color: var(--neon-color1);
+            text-align: center;
+            text-shadow: 0 0 calc(var(--neon-width) / 5 * 5px) var(--neon-color1), 0 0 calc(var(--neon-width) / 5 * 10px) var(--neon-color1), 0 0 calc(var(--neon-width) / 5 * 20px) var(--neon-color2), 0 0 calc(var(--neon-width) / 5 * 30px) var(--neon-color2), 0 0 calc(var(--neon-width) / 5 * 40px) var(--neon-color2), 0 0 calc(var(--neon-width) / 5 * 55px) var(--neon-color2), 0 0 calc(var(--neon-width) / 5 * 75px) var(--neon-color2);
+            font-family: monospace;
+            --height: calc(100vh / 0.55 / 0.55 / 8);
+            font-size: var(--height);
+            line-height: 100vh;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+</body>
+<script>
+    setInterval(function() {
+        var hour=new Date().getHours();
+        var minute=new Date().getMinutes();
+        var second=new Date().getSeconds();
+        if(hour<10) hour='0'+hour;
+        if(minute<10) minute='0'+minute;
+        if(second<10) second='0'+second;
+        document.querySelector('div:first-child').innerHTML=hour+':'+minute+':'+second;
+    }, 50);
+</script>
+</html>

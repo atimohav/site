@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <link rel="shortcut icon" href="IMG/icon.gif" type="image/gif">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Проект Аладьина Тимофея 9 "Б"</title>
+    <link rel="stylesheet" type="text/css" href="../../colors.css">
+    <style>
+        *, *::after, *::before {
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 24px;
+            background-size: 90% 90%;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            transition: background-image 2s;
+        }
+        body {
+            perspective: 900px;
+        }
+        div {
+            position: absolute;
+            font-family: monospace;
+            --height: calc(90vw / 0.55 / 8);
+            font-size: var(--height);
+            line-height: var(--height);
+            height: var(--height);
+            width: calc(90vw / 8 + 1px);
+            top: calc(50vh - var(--height) / 2);
+            left: 5vw;
+            overflow: hidden;
+            background: var(--background2);
+            color: var(--text-color2);
+            transition: transform 1s;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+</body>
+<script>
+    var turn_clock3_arr=new Array(8);
+    for(var i=0; i<8; i++) turn_clock3_arr[i]=0;
+    document.querySelectorAll('div')[0].style.zIndex='1';
+    document.querySelectorAll('div')[1].style.zIndex='2';
+    document.querySelectorAll('div')[2].style.zIndex='3';
+    document.querySelectorAll('div')[3].style.zIndex='4';
+    document.querySelectorAll('div')[4].style.zIndex='4';
+    document.querySelectorAll('div')[5].style.zIndex='3';
+    document.querySelectorAll('div')[6].style.zIndex='2';
+    document.querySelectorAll('div')[7].style.zIndex='1';
+    var main_timer_arr=new Date().getTime();
+    setInterval(function() {
+        var hour=new Date().getHours();
+        var minute=new Date().getMinutes();
+        var second=new Date().getSeconds();
+        if(hour<10) hour='0'+hour;
+        if(minute<10) minute='0'+minute;
+        if(second<10) second='0'+second;
+        for(var i=0; i<8; i++) {
+            document.querySelectorAll('div')[i].style.left='calc(5vw + 90vw / 8 * '+i+')';
+            if(document.querySelectorAll('div')[i].innerHTML!=(hour+':'+minute+':'+second)[i]) {
+                turn_clock3_arr[i]++;
+                document.querySelectorAll('div')[i].style.transform='rotateX(calc(1turn * '+turn_clock3_arr[i]+'))';
+                document.querySelectorAll('div')[i].innerHTML=(hour+':'+minute+':'+second)[i];
+            }
+        }
+    }, 500);
+</script>
+</html>

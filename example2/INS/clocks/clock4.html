@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>неоновые часы</title>
+    <link rel="stylesheet" type="text/css" href="../../colors.css">
+    <style>
+        *, *::after, *::before {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        #wrapper {
+            background: black;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+        }
+        #wrapper>div:not(#table) {
+            position: absolute;
+            --height: calc(100vh / 792 * 150);
+            --width: calc(var(--height) / 1.5);
+            width: var(--width);
+            height: var(--height);
+            margin-left: calc(100vw / 16 - var(--width) / 2);
+            border-width: calc(var(--height) / 15);
+            border-style: solid;
+            border-color: rgba(255, 0, 0, 0.2);
+            border-radius: 100vw 100vw 0 0;
+            top: calc(60vh - var(--height));
+            --left: calc(100vw / 8);
+            z-index: 1;
+        }
+        #wrapper>div#table {
+            position: absolute;
+            top: 60vh;
+            left: 0;
+            width: 100vw;
+            height: 40vh;
+            --border: rgba(143, 130, 91, 0.5);
+            background: rgba(25.6, 12.8, 0, 1);
+            z-index: 0;
+        }
+        #wrapper>div#table>div.line {
+            position: absolute;
+            border-radius: 100vw;
+            height: 4vh;
+            background: var(--border);
+            z-index: 0;
+        }
+        #wrapper>div#table>div.line:nth-child(1) {
+            top: calc(30% - 2vh);
+            left: calc(50% - 40vw);
+            width: 80vw;
+        }
+        #wrapper>div#table>div.line:nth-child(2) {
+            top: calc(50% - 2vh);
+            left: calc(50% - 27.5vw);
+            width: 55vw;
+        }
+        #wrapper>div#table>div.line:nth-child(3) {
+            top: calc(70% - 2vh);
+            left: calc(50% - 20vw);
+            width: 40vw;
+        }
+        #wrapper>div#table>div.circle {
+            position: absolute;
+            border-radius: 1000px;
+        }
+        #wrapper>div#table>div.circle:nth-child(4) {
+            top: calc(50% - 15vh);
+            left: calc(50% - 15vh);
+            background: inherit;
+            border: 5vh solid var(--border);
+            width: 30vh;
+            height: 30vh;
+            z-index: 1;
+        }
+        #wrapper>div#table>div.circle:nth-child(5) {
+            top: calc(50% - 5vh);
+            left: calc(50% - 5vh);
+            background: var(--border);
+            width: 10vh;
+            height: 10vh;
+            z-index: 2;
+        }
+        #wrapper>div:not(#table)>div {
+            position: absolute;
+            top: calc(var(--height) / -15);
+            left: calc(var(--height) / -15);
+            width: inherit;
+            height: inherit;
+            line-height: var(--height);
+            font-size: calc(var(--height) * 0.9);
+            --neon-color1: rgba(128, 128, 0, 0.1);
+            --neon-color2: rgba(128, 0, 0, 0.1);
+            --shadow-size: calc(var(--height) / 20);
+            color: var(--neon-color1);
+            text-align: center;
+            text-shadow: 0 0 calc(var(--shadow-size) * 1) var(--neon-color1), 0 0 calc(var(--shadow-size) * 2) var(--neon-color1), 0 0 calc(var(--shadow-size) * 4) var(--neon-color2), 0 0 calc(var(--shadow-size) * 6) var(--neon-color2), 0 0 calc(var(--shadow-size) * 8) var(--neon-color2), 0 0 calc(var(--shadow-size) * 11) var(--neon-color2), 0 0 calc(var(--shadow-size) * 15) var(--neon-color2);
+            font-family: monospace;
+            transition-property: text-shadow, color;
+            transition-duration: 1s;
+            z-index: 0;
+        }
+        #wrapper>div:not(#table)>div.switched {
+            --neon-color1: rgb(255, 255, 0);
+            --neon-color2: rgb(255, 0, 0);
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <div id='wrapper'>
+        <div id="table">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+        </div>
+    </div>
+</body>
+<script>
+    var clock4_wrapper=document.querySelector('#wrapper');
+    for(var i=0; i<8; i++) {
+        clock4_wrapper.innerHTML+='<div style="left: calc(var(--left) * '+i+')"></div>';
+    }
+    for(var i=0; i<8; i++) {
+        for(var j=0; j<=10; j++) {
+            if(j<10) {
+                clock4_wrapper.querySelectorAll('div:not([id]):not([class])')[i].innerHTML+='<div id="id'+j+'">'+j+'</div>';
+            }
+            else if(j==10) {
+                clock4_wrapper.querySelectorAll('div:not([id]):not([class])')[i].innerHTML+='<div id="id_">:</div>';
+            }
+        }
+    }
+    setInterval(function() {
+        var hour=new Date().getHours();
+        var minute=new Date().getMinutes();
+        var second=new Date().getSeconds();
+        var doublepoint='_';
+        if(hour<10) hour='0'+hour;
+        if(minute<10) minute='0'+minute;
+        if(second%2) doublepoint=' ';
+        if(second<10) second='0'+second;
+        var str='';
+        str=hour+doublepoint+minute+doublepoint+second;
+        for(var i=0; i<8; i++) {
+            for(var j=0; j<11; j++) {
+                clock4_wrapper.querySelectorAll('div:not([id]):not([class])')[i].querySelectorAll('div[id]')[j].classList.remove('switched');
+            }
+            if(str[i]!=' ') clock4_wrapper.querySelectorAll('div:not([id]):not([class])')[i].querySelector('#id'+str[i]).classList.add('switched');
+        }
+    }, 500);
+</script>
+</html>

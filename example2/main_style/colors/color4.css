@@ -1,0 +1,19 @@
+
+:root {
+    --my-green: #008000;
+    --my-blue: #0080ff;
+    --my-red: #800000;
+    --background1: #ffffff;
+    --background2: #000;
+    --background3: #fff;
+    --background4: var(--my-green);
+    --text-color1: #000000;
+    --text-color2: #fff;
+    --text-color3: #000;
+    --text-color4: #000000;
+    --href-background: transparent;
+    --href-text-color: var(--my-blue);
+    --href-color: var(--my-blue);
+    --selection-background: var(--my-green);
+    --selection-text-color: white;
+}
